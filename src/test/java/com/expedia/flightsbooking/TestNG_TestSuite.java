@@ -1,14 +1,18 @@
 package com.expedia.flightsbooking;
 
 import java.util.concurrent.TimeUnit;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.AfterClass;
+
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import pageclasses.SearchPage;
 
@@ -17,13 +21,26 @@ public class TestNG_TestSuite {
 	private String baseUrl;
 	static Logger log = Logger.getLogger(TestNG_TestSuite.class);
 
+
 	@BeforeClass
-	public void beforeClass() {
+	public void beforeClass() throws MalformedURLException {
+	    String username = "curtmanning%40ltgc.com"; // Your username
+	    String authkey = "ucc45ee689bfd25a";  // Your authkey
 		String baseDir= System.getProperty("user.dir");
-		String geckoDriver = baseDir + "/" + "drivers/geckodriver.exe";
+        DesiredCapabilities caps = new DesiredCapabilities();
+        
+        caps.setCapability("name", "Login Form Example");
+        caps.setCapability("build", "1.0");
+        caps.setCapability("browserName", "Chrome");
+        caps.setCapability("version", "72");
+        caps.setCapability("platform", "Windows 10");
+        caps.setCapability("screenResolution", "1366x768");
+        caps.setCapability("record_video", "true");
+        caps.setCapability("record_network", "false");
 		
-		System.setProperty("webdriver.gecko.driver", geckoDriver);
-		driver = new FirefoxDriver();
+		// System.setProperty("webdriver.gecko.driver", geckoDriver);
+		RemoteWebDriver driver = new RemoteWebDriver(new URL("http://" + username + ":" + authkey +"@hub.crossbrowsertesting.com:80/wd/hub"), caps);
+		// driver = new FirefoxDriver();
 		baseUrl = "https://www.expedia.com/";
 
 		// Maximize the browser's window
