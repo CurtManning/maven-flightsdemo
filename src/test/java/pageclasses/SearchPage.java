@@ -3,6 +3,7 @@ package pageclasses;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 // import utilities.WaitTypes;
 
@@ -14,7 +15,7 @@ public class SearchPage {
 	 * Clear all the fields on the Search page
 	 * @param driver
 	 */
-	public static void clearAllFields(WebDriver driver) {
+	public static void clearAllFields(RemoteWebDriver driver) {
 		driver.findElement(By.id("flight-origin-hp-flight")).clear();
 		driver.findElement(By.id("flight-destination-hp-flight")).clear();
 		driver.findElement(By.id("flight-departing")).clear();
@@ -25,7 +26,7 @@ public class SearchPage {
 	 * @param driver
 	 * @return
 	 */
-	public static WebElement originTextBox(WebDriver driver) {
+	public static WebElement originTextBox(RemoteWebDriver driver) {
 		element = driver.findElement(By.id("flight-origin-hp-flight"));
 		log.info("Origin text box element found");
 		return element;
@@ -36,7 +37,7 @@ public class SearchPage {
 	 * @param driver
 	 * @param origin
 	 */
-	public static void fillOriginTextBox(WebDriver driver, String origin) throws Exception {
+	public static void fillOriginTextBox(RemoteWebDriver driver, String origin) throws Exception {
 		element = originTextBox(driver);
 		element.sendKeys(origin);
 		Thread.sleep(2000);
@@ -49,7 +50,7 @@ public class SearchPage {
 	 * @param driver
 	 * @return
 	 */
-	public static WebElement destinationTextBox(WebDriver driver) {
+	public static WebElement destinationTextBox(RemoteWebDriver driver) {
 		element = driver.findElement(By.id("flight-destination-hp-flight"));
 		log.info("Destination text box element found");
 		return element;
@@ -60,7 +61,7 @@ public class SearchPage {
 	 * @param driver
 	 * @param origin
 	 */
-	public static void fillDestinationTextBox(WebDriver driver, String destination) throws Exception {
+	public static void fillDestinationTextBox(RemoteWebDriver driver, String destination) throws Exception {
 		element = destinationTextBox(driver);
 		element.sendKeys(destination);
 		Thread.sleep(2000);
@@ -73,7 +74,7 @@ public class SearchPage {
 	 * @param driver
 	 * @return
 	 */
-	public static WebElement departureDateTextBox(WebDriver driver) {
+	public static WebElement departureDateTextBox(RemoteWebDriver driver) {
 		element = driver.findElement(By.id("flight-departing"));
 		return element;
 	}
@@ -83,7 +84,7 @@ public class SearchPage {
 	 * @param driver
 	 * @param date
 	 */
-	public static void fillDepartureDateTextBox(WebDriver driver, String date) {
+	public static void fillDepartureDateTextBox(RemoteWebDriver driver, String date) {
 		element = departureDateTextBox(driver);
 		element.sendKeys(date);
 		log.info("Enter departure date as " + date);
@@ -94,7 +95,7 @@ public class SearchPage {
 	 * @param driver
 	 * @return
 	 */
-	public static WebElement returnDateTextBox(WebDriver driver) {
+	public static WebElement returnDateTextBox(RemoteWebDriver driver) {
 		element = driver.findElement(By.id("flight-returning"));
 		return element;
 	}
@@ -104,7 +105,7 @@ public class SearchPage {
 	 * @param driver
 	 * @param date
 	 */
-	public static void fillReturnDateTextBox(WebDriver driver, String date) {
+	public static void fillReturnDateTextBox(RemoteWebDriver driver, String date) {
 		element = returnDateTextBox(driver);
 		element.clear();
 		element.sendKeys(date);
@@ -117,7 +118,7 @@ public class SearchPage {
 	 * @param driver
 	 * @return
 	 */
-	public static WebElement searchButton(WebDriver driver) {
+	public static WebElement searchButton(RemoteWebDriver driver) {
 		element = driver.findElement(By.id("search-button"));
 		return element;
 	}
@@ -126,7 +127,7 @@ public class SearchPage {
 	 * Click on search button
 	 * @param driver
 	 */
-	public static void clickOnSearchButton(WebDriver driver) {
+	public static void clickOnSearchButton(RemoteWebDriver driver) {
 		element = searchButton(driver);
 		element.click();
 	}
@@ -135,7 +136,7 @@ public class SearchPage {
 	 * Navigate to flights tab
 	 * @param driver
 	 */
-	public static void navigateToFlightsTab(WebDriver driver) {
+	public static void navigateToFlightsTab(RemoteWebDriver driver) {
 		// driver.findElement(By.id("header-history")).click();
 		element = driver.findElement(By.id("tab-flight-tab-hp"));
 		element.click();
@@ -145,7 +146,7 @@ public class SearchPage {
 	 * Click on Advanced Options link
 	 * @param driver
 	 */
-	public static void clickOnAdvancedLink(WebDriver driver) {
+	public static void clickOnAdvancedLink(RemoteWebDriver driver) {
 		element = driver.findElement(By.id("advanced-options"));
 		element.click();
 		log.info("Clicked on Advanced Options link");
@@ -154,7 +155,7 @@ public class SearchPage {
 	 * Click non-stop check box
 	 * @param driver
 	 */
-	public static void clickNonStopCheckBox(WebDriver driver) {
+	public static void clickNonStopCheckBox(RemoteWebDriver driver) {
 		element = driver.findElement(By.id("advanced-flight-nonstop"));
 		element.click();
 		log.info("Clicked non-stop check box");
@@ -163,7 +164,7 @@ public class SearchPage {
 	 * Select flight class
 	 * @param driver
 	 */
-	public static void selectFlightClass(WebDriver driver, String flightClass) {
+	public static void selectFlightClass(RemoteWebDriver driver, String flightClass) {
 		Select options = new Select(driver.findElement(By.id("flight-advanced-preferred-class")));
 		options.selectByValue(flightClass);
 		log.info("Select flight class as " + flightClass);
@@ -172,7 +173,7 @@ public class SearchPage {
 	 * Click on Morning check box to filter the results
 	 * @param driver
 	 */
-	public static void clickMorningFlight(WebDriver driver) {
+	public static void clickMorningFlight(RemoteWebDriver driver) {
 //		WebElement element = WaitTypes.getWhenVisible(driver, 
 //				By.xpath("//ul[@id='departureTimeList']//span[contains(text(), 'Morning')]//preceding-sibling::input"), 30);
 //		element.click();
@@ -183,7 +184,7 @@ public class SearchPage {
 	 * @param driver
 	 * @param flightAdults
 	 */
-	public static void selectFlightAdults(WebDriver driver, String flightAdults) {
+	public static void selectFlightAdults(RemoteWebDriver driver, String flightAdults) {
 		Select options = new Select(driver.findElement(By.id("flight-adults")));
 		options.selectByValue(flightAdults);
 		log.info("Select flight adults as " + flightAdults);
