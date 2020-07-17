@@ -17,9 +17,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import pageclasses.SearchPage;
 
 public class TestNG_TestSuite {
-	private WebDriver driver;
+
 	private String baseUrl;
 	static Logger log = Logger.getLogger(TestNG_TestSuite.class);
+	RemoteWebDriver driver;
 
 
 	@BeforeClass
@@ -39,7 +40,7 @@ public class TestNG_TestSuite {
         caps.setCapability("record_network", "false");
 		
 		// System.setProperty("webdriver.gecko.driver", geckoDriver);
-		RemoteWebDriver driver = new RemoteWebDriver(new URL("http://" + username + ":" + authkey +"@hub.crossbrowsertesting.com:80/wd/hub"), caps);
+		driver = new RemoteWebDriver(new URL("http://" + username + ":" + authkey +"@hub.crossbrowsertesting.com:80/wd/hub"), caps);
 		// driver = new FirefoxDriver();
 		baseUrl = "https://www.expedia.com/";
 
